@@ -35,7 +35,7 @@ namespace JwtWebApi.Controllers
         public async Task<ActionResult<string>> Login(UserDto request)
         {
             if (user.Username != request.Username)
-            {
+            { 
                 return BadRequest("User not Found");
             }
             
@@ -71,7 +71,8 @@ namespace JwtWebApi.Controllers
         {
             List<Claim> claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.Username)
+                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTypes.Role, "Admin")
             };
             var key = new SymmetricSecurityKey(System.Text.Encoding
                 .UTF8.GetBytes(Configuration.GetSection("AppSettings:Token").Value));
